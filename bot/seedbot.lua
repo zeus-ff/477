@@ -218,13 +218,16 @@ function create_config( )
     "broadcast",
     "download_media",
     "invite",
+    "plugins",
+    "fedback",
+    "sudo",
     "all",
     "leave_ban"
     },
     sudo_users = {131189448,146661928},--Sudo users
     disabled_channels = {},
     moderation = {data = 'data/moderation.json'},
-    about_text = [[Fox v2 😊
+    about_text = [[Fox v2/5 😊
 👥 Sudos: 
 👤 @Tofaniyam 
 👤 @teleadminfox 
