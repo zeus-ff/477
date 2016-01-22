@@ -136,10 +136,10 @@ do
       },
     },
     patterns = {
-      "^!info$",
-      "^!info (chat) (.*)$",
-	  "^!info (chat) (.*)$",
-      "^!info (.*)$"
+      "^[Ii]nfo$",
+      "^[Ii]nfo (chat) (.*)$",
+	  "^[Ii]nfo (chat) (.*)$",
+      "^[Ii]nfo (.*)$"
     },
     run = run
   }
