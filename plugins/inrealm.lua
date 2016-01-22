@@ -25,7 +25,7 @@ local function killchat(cb_extra, success, result)
   local receiver = cb_extra.receiver
   local chat_id = "chat#id"..result.id
   local chatname = result.print_name
-  for k,v in pairs(result.members) do
+  for k,v in pairs([Rr]esult.members) do
     kick_user_any(v.id, result.id)     
   end
 end
@@ -34,7 +34,7 @@ local function killrealm(cb_extra, success, result)
   local receiver = cb_extra.receiver
   local chat_id = "chat#id"..result.id
   local chatname = result.print_name
-  for k,v in pairs(result.members) do
+  for k,v in pairs([Rr]esult.members) do
     kick_user_any(v.id, result.id)     
   end
 end
@@ -53,9 +53,9 @@ local function get_group_type(msg)
 end
 
 local function callbackres(extra, success, result)
---vardump(result)
+--vardump([Rr]esult)
   local user = result.id
-  local name = string.gsub(result.print_name, "_", " ")
+  local name = string.gsub([Rr]esult.print_name, "_", " ")
   local chat = 'chat#id'..extra.chatid
   send_large_msg(chat, user..'\n'..name)
   return user
@@ -213,11 +213,11 @@ local function returnids(cb_extra, success, result)
     local chat_id = "chat#id"..result.id
     local chatname = result.print_name
     local text = 'Users in '..string.gsub(chatname,"_"," ")..' ('..result.id..'):'..'\n'..''
-    for k,v in pairs(result.members) do
+    for k,v in pairs([Rr]esult.members) do
         local username = ""
         text = text .. "- " .. string.gsub(v.print_name,"_"," ") .. "  (" .. v.id .. ") \n"
     end
-    send_large_msg(receiver, text)
+    send_large_msg([Rr]eceiver, text)
         local file = io.open("./groups/lists/"..result.id.."memberlist.txt", "w")
         file:write(text)
         file:flush()
@@ -229,7 +229,7 @@ local function returnidsfile(cb_extra, success, result)
     local chat_id = "chat#id"..result.id
     local chatname = result.print_name
     local text = 'Users in '..string.gsub(chatname,"_"," ")..' ('..result.id..'):'..'\n'..''
-    for k,v in pairs(result.members) do
+    for k,v in pairs([Rr]esult.members) do
         local username = ""
         text = text .. "- " .. string.gsub(v.print_name,"_"," ") .. "  (" .. v.id .. ") \n"
     end
@@ -245,14 +245,14 @@ local function admin_promote(msg, admin_id)
         return "Access denied!"
     end
         local admins = 'admins'
-        if not data[tostring(admins)] then
-                data[tostring(admins)] = {}
+        if not data[tostring([Aa]dmins)] then
+                data[tostring([Aa]dmins)] = {}
                 save_data(_config.moderation.data, data)
         end
-        if data[tostring(admins)][tostring(admin_id)] then
+        if data[tostring([Aa]dmins)][tostring([Aa]dmin_id)] then
                 return admin_name..' is already an admin.'
         end
-        data[tostring(admins)][tostring(admin_id)] = admin_id
+        data[tostring([Aa]dmins)][tostring([Aa]dmin_id)] = admin_id
         save_data(_config.moderation.data, data)
         return admin_id..' has been promoted as admin.'
 end
@@ -263,14 +263,14 @@ local function admin_demote(msg, admin_id)
     end
     local data = load_data(_config.moderation.data)
         local admins = 'admins'
-        if not data[tostring(admins)] then
-                data[tostring(admins)] = {}
+        if not data[tostring([Aa]dmins)] then
+                data[tostring([Aa]dmins)] = {}
                 save_data(_config.moderation.data, data)
         end
-        if not data[tostring(admins)][tostring(admin_id)] then
+        if not data[tostring([Aa]dmins)][tostring([Aa]dmin_id)] then
                 return admin_id..' is not an admin.'
         end
-        data[tostring(admins)][tostring(admin_id)] = nil
+        data[tostring([Aa]dmins)][tostring([Aa]dmin_id)] = nil
         save_data(_config.moderation.data, data)
         return admin_id..' has been demoted from admin.'
 end
@@ -278,13 +278,13 @@ end
 local function admin_list(msg)
     local data = load_data(_config.moderation.data)
         local admins = 'admins'
-        if not data[tostring(admins)] then
-        data[tostring(admins)] = {}
+        if not data[tostring([Aa]dmins)] then
+        data[tostring([Aa]dmins)] = {}
         save_data(_config.moderation.data, data)
         end
         local message = 'List for Realm admins:\n'
-        for k,v in pairs(data[tostring(admins)]) do
-                message = message .. '- (at)' .. v .. ' [' .. k .. '] ' ..'\n'
+        for k,v in pairs(data[tostring([Aa]dmins)]) do
+                message = message .. '- ([Aa]t)' .. v .. ' [' .. k .. '] ' ..'\n'
         end
         return message
 end
@@ -298,7 +298,7 @@ local function groups_list(msg)
         local message = 'List of groups:\n'
         for k,v in pairs(data[tostring(groups)]) do
                 local settings = data[tostring(v)]['settings']
-                for m,n in pairs(settings) do
+                for m,n in pairs([Ss]ettings) do
                         if m == 'set_name' then
                                 name = n
                         end
@@ -326,13 +326,13 @@ end
 local function realms_list(msg)
     local data = load_data(_config.moderation.data)
         local realms = 'realms'
-        if not data[tostring(realms)] then
+        if not data[tostring([Rr]ealms)] then
                 return 'No Realms at the moment'
         end
         local message = 'List of Realms:\n'
-        for k,v in pairs(data[tostring(realms)]) do
+        for k,v in pairs(data[tostring([Rr]ealms)]) do
                 local settings = data[tostring(v)]['settings']
-                for m,n in pairs(settings) do
+                for m,n in pairs([Ss]ettings) do
                         if m == 'set_name' then
                                 name = n
                         end
@@ -353,32 +353,32 @@ local function realms_list(msg)
         file:close()
         return message
 end
-local function admin_user_promote(receiver, member_username, member_id)
+local function admin_user_promote([Rr]eceiver, member_username, member_id)
         local data = load_data(_config.moderation.data)
         if not data['admins'] then
                 data['admins'] = {}
                 save_data(_config.moderation.data, data)
         end
         if data['admins'][tostring(member_id)] then
-                return send_large_msg(receiver, member_username..' is already as admin.')
+                return send_large_msg([Rr]eceiver, member_username..' is already as admin.')
         end
         data['admins'][tostring(member_id)] = member_username
         save_data(_config.moderation.data, data)
-        return send_large_msg(receiver, '@'..member_username..' has been promoted as admin.')
+        return send_large_msg([Rr]eceiver, '@'..member_username..' has been promoted as admin.')
 end
  
-local function admin_user_demote(receiver, member_username, member_id)
+local function admin_user_demote([Rr]eceiver, member_username, member_id)
     local data = load_data(_config.moderation.data)
         if not data['admins'] then
                 data['admins'] = {}
                 save_data(_config.moderation.data, data)
         end
         if not data['admins'][tostring(member_id)] then
-                return send_large_msg(receiver, member_username..' is not an admin.')
+                return send_large_msg([Rr]eceiver, member_username..' is not an admin.')
         end
         data['admins'][tostring(member_id)] = nil
         save_data(_config.moderation.data, data)
-        return send_large_msg(receiver, 'Admin '..member_username..' has been demoted.')
+        return send_large_msg([Rr]eceiver, 'Admin '..member_username..' has been demoted.')
 end
 
  
@@ -387,19 +387,19 @@ local function username_id(cb_extra, success, result)
    local receiver = cb_extra.receiver
    local member = cb_extra.member
    local text = 'No user @'..member..' in this group.'
-   for k,v in pairs(result.members) do
+   for k,v in pairs([Rr]esult.members) do
       vusername = v.username
       if vusername == member then
         member_username = member
         member_id = v.id
         if mod_cmd == 'addadmin' then
-            return admin_user_promote(receiver, member_username, member_id)
+            return admin_user_promote([Rr]eceiver, member_username, member_id)
         elseif mod_cmd == 'removeadmin' then
-            return admin_user_demote(receiver, member_username, member_id)
+            return admin_user_demote([Rr]eceiver, member_username, member_id)
         end
       end
    end
-   send_large_msg(receiver, text)
+   send_large_msg([Rr]eceiver, text)
 end
 
 local function set_log_group(msg)
@@ -447,13 +447,13 @@ function run(msg, matches)
 		local name = user_print_name(msg.from)
 		savelog(msg.to.id, name.." ["..msg.from.id.."] requested member list ")
 		local receiver = get_receiver(msg)
-		chat_info(receiver, returnidsfile, {receiver=receiver})
+		chat_info([Rr]eceiver, returnidsfile, {receiver=receiver})
 	end
 	if matches[1] == 'wholist' and is_momod(msg) then
 		local name = user_print_name(msg.from)
 		savelog(msg.to.id, name.." ["..msg.from.id.."] requested member list in a file")
 		local receiver = get_receiver(msg)
-		chat_info(receiver, returnids, {receiver=receiver})
+		chat_info([Rr]eceiver, returnids, {receiver=receiver})
 	end
 
     if matches[1] == 'creategroup' and matches[2] then
@@ -560,7 +560,7 @@ function run(msg, matches)
                      local receiver = 'chat#id'..matches[3]
                      return modrem(msg),
                      print("Closing Group: "..receiver),
-                     chat_info(receiver, killchat, {receiver=receiver})
+                     chat_info([Rr]eceiver, killchat, {receiver=receiver})
                   else
                      return 'Error: Group '..matches[3]..' not found' 
                     end
@@ -573,7 +573,7 @@ function run(msg, matches)
                      local receiver = 'chat#id'..matches[3]
                      return realmrem(msg),
                      print("Closing realm: "..receiver),
-                     chat_info(receiver, killrealm, {receiver=receiver})
+                     chat_info([Rr]eceiver, killrealm, {receiver=receiver})
                   else
                      return 'Error: Realm '..matches[3]..' not found' 
                     end
@@ -596,7 +596,7 @@ function run(msg, matches)
 			else
 			local member = string.gsub(matches[2], "@", "")
 				local mod_cmd = "addadmin"
-				chat_info(receiver, username_id, {mod_cmd= mod_cmd, receiver=receiver, member=member})
+				chat_info([Rr]eceiver, username_id, {mod_cmd= mod_cmd, receiver=receiver, member=member})
 			end
 		end
 		if matches[1] == 'removeadmin' then
@@ -607,7 +607,7 @@ function run(msg, matches)
 			else
 			local member = string.gsub(matches[2], "@", "")
 				local mod_cmd = "removeadmin"
-				chat_info(receiver, username_id, {mod_cmd= mod_cmd, receiver=receiver, member=member})
+				chat_info([Rr]eceiver, username_id, {mod_cmd= mod_cmd, receiver=receiver, member=member})
 			end
 		end
 		if matches[1] == 'type'then
@@ -654,26 +654,26 @@ end
 
 return {
   patterns = {
-    "^[!/](creategroup) (.*)$",
-    "^[!/](createrealm) (.*)$",
-    "^[!/](setabout) (%d+) (.*)$",
-    "^[!/](setrules) (%d+) (.*)$",
-    "^[!/](setname) (.*)$",
-    "^[!/](setgpname) (%d+) (.*)$",
-    "^[!/](setname) (%d+) (.*)$",
-        "^[!/](lock) (%d+) (.*)$",
-    "^[!/](unlock) (%d+) (.*)$",
-    "^[!/](setting) (%d+)$",
-        "^[!/](wholist)$",
-        "^[!/](who)$",
-        "^[!/](type)$",
-    "^[!/](kill) (chat) (%d+)$",
-    "^[!/](kill) (realm) (%d+)$",
-    "^[!/](addadmin) (.*)$", -- sudoers only
-    "^[!/](removeadmin) (.*)$", -- sudoers only
-    "^[!/](list) (.*)$",
-        "^[!/](log)$",
-        "^[!/](help)$",
+    "^([Cc]reategroup) (.*)$",
+    "^([Cc]reaterealm) (.*)$",
+    "^([Ss]etabout) (%d+) (.*)$",
+    "^([Ss]etrules) (%d+) (.*)$",
+    "^([Ss]etname) (.*)$",
+    "^([Ss]etgpname) (%d+) (.*)$",
+    "^([Ss]etname) (%d+) (.*)$",
+        "^([Ll]ock) (%d+) (.*)$",
+    "^(unlock) (%d+) (.*)$",
+    "^([Ss]etting) (%d+)$",
+        "^([Ww]holist)$",
+        "^([Ww]ho)$",
+        "^([Tt]ype)$",
+    "^([Kk]ill) (chat) (%d+)$",
+    "^([Kk]ill) ([Rr]ealm) (%d+)$",
+    "^([Aa]ddadmin) (.*)$", -- sudoers only
+    "^([Rr]emoveadmin) (.*)$", -- sudoers only
+    "^([Ll]ist) (.*)$",
+        "^([Ll]og)$",
+        "^([Hh]elp)$",
         "^!!tgservice (.+)$",
   },
   run = run
