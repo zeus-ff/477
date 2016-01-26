@@ -136,9 +136,9 @@ do
       },
     },
     patterns = {
-      "^[Ii]nfo$",
-      "^[Ii]nfo (chat) (.*)$",
-	  "^[Ii]nfo (chat) (.*)$",
+      "^[Ii](nfo)$",
+      "^[Ii](nfo) (chat) (.*)$",
+	  "^[Ii](nfo) (chat) (.*)$",
       "^[Ii]nfo (.*)$"
     },
     run = run
