@@ -222,6 +222,7 @@ function create_config( )
     "fedback",
     "sudo",
     "all",
+    "info",
     "leave_ban"
     },
     sudo_users = {131189448,146661928},--Sudo users
