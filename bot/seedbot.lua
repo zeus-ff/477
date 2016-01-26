@@ -219,7 +219,7 @@ function create_config( )
     "download_media",
     "invite",
     "plugins",
-    "fedback",
+    "feedback",
     "sudo",
     "all",
     "info",
