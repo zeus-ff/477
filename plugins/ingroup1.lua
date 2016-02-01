@@ -1383,6 +1383,3 @@ return {
   run = run
 }
 end
-
-Status API Training Shop Blog About Pricing
-© 2016 GitHub, Inc. Terms Priv
