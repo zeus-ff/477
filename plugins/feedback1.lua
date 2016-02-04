@@ -16,9 +16,9 @@ do
  end
  return {
   
-  description = "Feedback",
+  description = "Feedback.",
  
-  usage = "!feedback message",
+  usage = "!feedback message.",
   patterns = {
   "^[Ff]eedback (.*)$"
  
