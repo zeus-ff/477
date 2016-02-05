@@ -19,7 +19,8 @@ local function check_member_autorealm(cb_extra, success, result)
 		  lock_name = 'yes',
           lock_photo = 'no',
           lock_member = 'no',
-          flood = 'yes'
+          flood = 'yes',
+          welcome = 'yes'
         }
       }
       save_data(_config.moderation.data, data)
@@ -52,7 +53,8 @@ local function check_member_realm_add(cb_extra, success, result)
 		  lock_name = 'yes',
           lock_photo = 'no',
           lock_member = 'no',
-          flood = 'yes'
+          flood = 'yes',
+          welcome = 'yes'
         }
       }
       save_data(_config.moderation.data, data)
@@ -88,6 +90,7 @@ function check_member_group(cb_extra, success, result)
           lock_photo = 'no',
           lock_member = 'no',
           flood = 'yes',
+          welcome = 'yes'
         }
       }
       save_data(_config.moderation.data, data)
@@ -123,6 +126,7 @@ local function check_member_modadd(cb_extra, success, result)
           lock_photo = 'no',
           lock_member = 'no',
           flood = 'yes',
+          welcome = 'yes'
         }
       }
       save_data(_config.moderation.data, data)
@@ -525,7 +529,34 @@ local function unlock_group_photomod(msg, data, target)
     save_data(_config.moderation.data, data)
     return 'Group photo has been unlocked'
   end
-end
+  end
+endlocal function welcome_yes(msg, data, target)
+   if not is_momod(msg) then
+     return "For moderators only!"
+   end
+   local welcome_yes = data[tostring(target)]['settings']['welcome_yes']
+   if welcome_yes == 'yes' then
+     return 'Welcome is already enabled'
+   else
+     data[tostring(target)]['settings']['welcome_yes'] = 'yes'
+     save_data(_config.moderation.data, data)
+     return 'Welcome has been enabled'
+   end
+ end
+ end
+ local function welcome_no(msg, data, target)
+   if not is_momod(msg) then
+     return "For moderators only!"
+   end
+   local welcome_no = data[tostring(target)]['settings']['welcome_no']
+   if group_adds_lock == 'no' then
+     return 'Welcome is already disabled'
+   else
+     data[tostring(target)]['settings']['welcome_no'] = 'no'
+     save_data(_config.moderation.data, data)
+     return 'Welcome has been disabled'
+   end
+ end
 
 local function set_rulesmod(msg, data, target)
   if not is_momod(msg) then
