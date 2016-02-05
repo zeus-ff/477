@@ -14,8 +14,6 @@ local function check_member_autorealm(cb_extra, success, result)
         settings = {
           set_name = string.gsub(msg.to.print_name, '_', ' '),
           lock_join = 'no',
-          welcome_stat = 'yes',
-          welcome = 'chat',
 		  antitag = 'no',
 		  antilink = 'no',
 		  lock_name = 'yes',
@@ -50,8 +48,6 @@ local function check_member_realm_add(cb_extra, success, result)
           set_name = string.gsub(msg.to.print_name, '_', ' '),
           lock_join = 'no',
 		  antitag = 'no',
-		   welcome_stat = 'yes',
-          welcome = 'chat',
 		  antilink = 'no',
 		  lock_name = 'yes',
           lock_photo = 'no',
@@ -88,8 +84,6 @@ function check_member_group(cb_extra, success, result)
           lock_join = 'no',
 		  antitag = 'no',
 		  antilink = 'no',
-		   welcome_stat = 'yes',
-          welcome = 'chat',
 		  lock_name = 'yes',
           lock_photo = 'no',
           lock_member = 'no',
@@ -125,8 +119,6 @@ local function check_member_modadd(cb_extra, success, result)
           lock_join = 'no',
 		  antitag = 'no',
 		  antilink = 'no',
-		   welcome_stat = 'yes',
-          welcome = 'chat',
 		  lock_name = 'yes',
           lock_photo = 'no',
           lock_member = 'no',
@@ -224,7 +216,7 @@ local function show_group_settingsmod(msg, data, target)
     	leave_ban = data[tostring(msg.to.id)]['settings']['leave_ban']
    	end
   local settings = data[tostring(target)]['settings']
-  local text = "Group settings:\nLock group join : "..settings.lock_join.."\nLock group tag : "..settings.antitag.."\nLock group link : "..settings.antilink.."\nLock group name : "..settings.lock_name.."\nLock group photo : "..settings.lock_photo.."\nLock group member : "..settings.lock_member.."\nLock group leave : "..leave_ban.."\nflood sensitivity : "..NUM_MSG_MAX.."\nBot protection : "..bots_protection--"\nwelcome : "..chat
+  local text = "Group settings:\nLock group join : "..settings.lock_join.."\nLock group tag : "..settings.antitag.."\nLock group link : "..settings.antilink.."\nLock group name : "..settings.lock_name.."\nLock group photo : "..settings.lock_photo.."\nLock group member : "..settings.lock_member.."\nLock group leave : "..leave_ban.."\nflood sensitivity : "..NUM_MSG_MAX.."\nBot protection : "..bots_protection--"\nPublic: "..public
   return text
 end
 
@@ -534,33 +526,7 @@ local function unlock_group_photomod(msg, data, target)
     return 'Group photo has been unlocked'
   end
 end
-local function welcome_yes(msg, data, target)
-   if not is_momod(msg) then
-     return "For moderators only!"
-   end
-   local welcome_yes = data[tostring(target)]['settings']['welcome_yes']
-   if welcome_yes == 'yes' then
-     return 'Welcome is already enabled'
-   else
-     data[tostring(target)]['settings']['welcome_yes'] = 'yes'
-     save_data(_config.moderation.data, data)
-     return 'Welcome has been enabled'
-   end
- end
- end
- local function welcome_no(msg, data, target)
-   if not is_momod(msg) then
-     return "For moderators only!"
-   end
-   local welcome_no = data[tostring(target)]['settings']['welcome_no']
-   if group_adds_lock == 'no' then
-     return 'Welcome is already disabled'
-   else
-     data[tostring(target)]['settings']['welcome_no'] = 'no'
-     save_data(_config.moderation.data, data)
-     return 'Welcome has been disabled'
-   end
- end
+
 local function set_rulesmod(msg, data, target)
   if not is_momod(msg) then
     return "For moderators only!"
