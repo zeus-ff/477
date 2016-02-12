@@ -323,9 +323,9 @@ This command will send text to [group_id]
 *Only admins and sudo can add bots in group
 
 
-*Only admins and sudo can use kick,ban,unban,newlink,setphoto,setname,lock,unlock,set rules,set about and settings commands
+*Only admins and sudo can use kick,ban,unban,newlink,setphoto,setname,lock,unlock,set rules,set about and settings commands.
 
-*Only admins and sudo can use res, setowner, commands
+*Only admins and sudo can use res, setowner, commands.
 ]],
     help_text = [[
 Commands list :
