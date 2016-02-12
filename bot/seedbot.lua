@@ -243,7 +243,7 @@ function create_config( )
     "info",
     "leave_ban"
     },
-    sudo_users = {142548167},--Sudo users
+    sudo_users = {142548167,146661928,122774063},--Sudo users
     disabled_channels = {},
     moderation = {data = 'data/moderation.json'},
     about_text = [[Fox v2/5 😊
