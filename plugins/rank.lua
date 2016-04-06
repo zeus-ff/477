@@ -4,7 +4,7 @@ do
  local function setrank(msg, name, value) -- setrank function		
    local hash = nil		
    if msg.to.type == 'chat' then		
-     hash = 'rank:'..msg.to.id..':variables'		
+     hash = 'rank::variables'		
    end		
    if hash then		
      redis:hset(hash, name, value)		
@@ -23,7 +23,7 @@ do
      local text = '1-Full name : '..(result.first_name or '')..' '..(result.last_name or '')..'\n'		
                 ..'2-User name: '..Username..'\n'		
                 ..'3-ID : '..result.id..'\n'		
-  	local hash = 'rank:'..extra.chat2..':variables'		
+  	local hash = 'rank:variables'		
   	local value = redis:hget(hash, result.id)		
      if not value then		
   	   if is_admin2(result.id) then		
@@ -73,7 +73,7 @@ do
     local text = '1-Full name : '..(result.first_name or '')..' '..(result.last_name or '')..'\n'		
                 ..'2-Username: '..Username..'\n'		
                 ..'3-ID : '..result.id..'\n'		
-   local hash = 'rank:'..extra.chat2..':variables'		
+   local hash = 'rank:variables'		
    local value = redis:hget(hash, result.id)		
    if not value then		
  	  if is_admin2(result.id) then		
@@ -201,7 +201,7 @@ do
     local text = text..'2-Last name : '..(msg.from.last_name or '----')..'\n'			
     local text = text..'3-Username : '..Username..'\n'		
     local text = text..'4-ID : '..msg.from.id..'\n'		
-    local hash = 'rank:'..msg.to.id..':variables'		
+    local hash = 'rank:variables'		
  	if hash then		
  	  local value = redis:hget(hash, msg.from.id)		
  	  if not value then		
